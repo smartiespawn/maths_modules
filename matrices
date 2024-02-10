@@ -1,0 +1,14 @@
+def gen_identity_matrix(): #called at gen_identity_matrix()
+
+  dimensions = int(input("enter the dimensions of the identity matrix you want (identity matrices are always square so just enter ONE of the number of rows/columns): "))
+
+  identity_matrix = [[0] * dimensions for _ in range(dimensions)] #to gen a null matrix
+  for x in range(dimensions):
+    identity_matrix[x][x] = 1
+
+  print(f"I{dimensions} =")
+  for row in identity_matrix:
+    print(*row)
+
+
+
