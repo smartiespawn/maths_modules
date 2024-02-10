@@ -1,0 +1,48 @@
+import random
+
+def gcd(): #called by print(gcd())
+  #using euclidean algorithm (gcd of 2 nums = gcd(smaller num) and rem div larger/smaller)
+  
+  a = int(input("please enter the first num "))
+  b = int(input("please enter the second num "))
+
+  while b != 0: #last non 0 remainder is gcd of original pair
+    a,b = b, a % b
+
+  return a
+
+def primality(): #called by primality()
+
+  n = int(input("enter the number you want to test "))
+  k = int(input("enter the number of iterations you wish to test for (the higher the more accurate but also the longer it will take "))
+
+  #fermats_little-theorem (a^(p-1) = 1 under mod p)
+  def modular_expo(base, exp, modulus):
+    result = 1 #initialize as any a^p-1 must b at least 1
+    base = base % modulus
+
+    while exp > 0:
+      if exp % 2 == 1: #exp is odd
+        result = (result * base) % modulus
+      exp = exp //2
+      base = (base**2) % modulus
+
+    return result
+
+  def fermat_testing(n, k):
+    if n <= 1:
+      return False
+    if n == 2 or n == 3:
+      return True
+    for _ in range(k):
+      a = random.randint(2,n-2)
+      if modular_expo(a, n-1, n) != 1:
+        return False
+    return True
+
+
+  if fermat_testing(n,k):
+    print(f"{n} is probably a prime number (probably because of the instance of Carmichael numbers)")
+  else:
+    print(f"{n} is not a prime number")
+
